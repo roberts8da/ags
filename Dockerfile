@@ -14,4 +14,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && pip install -r requirements.txt \
     && rm -rf /var/lib/apt/lists/*
 
-CMD ["python3", "app.py", "--no-server"]
+CMD ["python3", "app.py"]
