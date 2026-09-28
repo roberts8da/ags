@@ -1,17 +1,13 @@
-FROM python:3.10
+FROM python:3.12-alpine
 
-WORKDIR /app
+WORKDIR /tmp
 
-COPY . .
+COPY app.py requirements.txt index.html ./
 
-EXPOSE 8080
+EXPOSE 3000
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    openssl \
-    bash \
-    curl \
-    && chmod +x app.py \
-    && pip install -r requirements.txt \
-    && rm -rf /var/lib/apt/lists/*
-
+RUN apk update && apk --no-cache add openssl bash curl &&\
+    chmod +x app.py &&\
+    pip install -r requirements.txt
+    
 CMD ["python3", "app.py"]
