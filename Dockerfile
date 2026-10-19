@@ -5,7 +5,6 @@ WORKDIR /app
 RUN apk add --no-cache curl openssl ca-certificates
 
 COPY app.py index.html ./
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py index.html .
