@@ -1,14 +1,13 @@
-FROM python:3.11-alpine
+FROM python:3.12-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache curl openssl ca-certificates
-
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY app.py index.html ./
+COPY app.py requirements.txt index.html ./
 
 EXPOSE 3000
 
-CMD ["python", "app.py"]
+RUN apk update && apk --no-cache add openssl bash curl &&\
+    chmod +x app.py &&\
+    pip install -r requirements.txt
+    
+CMD ["python3", "app.py"]
